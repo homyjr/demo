@@ -1,0 +1,33 @@
+{% extends "polls/base.html" %} 
+{% load static %}
+{% block content %}
+    {% for name in artist_names %}
+        <div class="row">
+            <div class="column">{{name.name}}</div>
+            <div class="column stars" id="rate_{{name.pk}}" data-rate_id = "{{name.pk}}" data-rating = "{{name.artist_avg}}" data-url="{% url 'dummy' name.pk %}">
+                
+             {% for i in '12345'|make_list %}
+                 {% if forloop.counter <= 3 %}
+                    
+                 
+                    <span class="fa fa-star checked rate" data-id="{{forloop.counter}}"></span>
+                 
+
+                 {% else %}
+
+                 
+                    <span class="fa fa-star rate" data-id="{{forloop.counter}}""></span>
+                 
+
+                 {% endif %}
+             {% endfor %}
+            </div>
+        </div>
+        
+    {% endfor %}
+{% endblock %}
+
+
+{% block scripts %}
+        <script src="/static/polls/js/main.js"></script>
+{% endblock %}

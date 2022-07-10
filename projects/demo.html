@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="overlay">
+  <div class="modal" style="padding-top: 100px;">
+    <form action="" id="myForm" >
+        <input type="text" name="viking">
+        <button type="button" id="kl">hello</button>
+    </form>
+        
+  </div>
+  
+</div>
+ <form id="modal">
+        <select multiple="multiple" id="test" class="multiselect" name="mylist">
+            <option value="one" >One</option>
+            <option value="two">Two</option>
+            <option value="three" selected>Three</option>
+            <option value="four"  selected>Four</option>
+            <option value="five">Five</option>
+        </select>
+        <button type="button" id = "hello">get</button>
+</form>
+
+
+
+<button onclick="$('.overlay').show();">Open modal</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $("#test").find('option[value="cheese"]').prop("selected", true);
+    $("#test").find('option[value="mozarella"]').prop("selected", true);
+
+// Don't forget to update view
+    
+
+    $('.overlay').on('click', function(e) {
+        if (e.target !== this) 
+        {  
+            console.log("yes")
+            return;
+        }
+        $('.overlay').hide();
+    });
+
+    
+
+    $('#kl').click(function() {
+    // get all the inputs into an array.
+    var $inputs = $('#myForm :input');
+
+    // not sure if you wanted this, but I thought I'd add it.
+    // get an associative array of just the values.
+    var values = {};
+    
+    $.each($('#myForm').serializeArray(), function(i, field) {
+    values[field.name] = field.value;
+    });
+    var optionText = 'Premium';
+    var optionValue = values['viking'];
+    
+    $('#test').append(`<option value="${optionValue}"> ${optionText} </option>`)
+    $("#test").find('option[value='+optionValue+']').prop("selected", true);
+    
+    });
+
+    
+    
+    $('#hello').click(function() {
+    // get all the inputs into an array.
+    var $inputs = $('#modal :input');
+
+    // not sure if you wanted this, but I thought I'd add it.
+    // get an associative array of just the values.
+    var values = {};
+    
+    $.each($('#modal').serializeArray(), function(i, field) {
+    values[field.name] = field.value;
+    });
+    var selectedValues = $('#test').val();
+    console.log(selectedValues)
+    console.log(values)
+
+    });
+         
+   
+   
+
+
+</script>
+
+</body>
+</html>
